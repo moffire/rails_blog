@@ -44,6 +44,9 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by(id: params[:id])
+    if @post.nil?
+      redirect_to posts_path
+    end
   end
 
   def post_params

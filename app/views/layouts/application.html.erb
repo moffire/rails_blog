@@ -10,9 +10,25 @@
 </head>
 
 <body>
-  <%= link_to 'Все статьи', root_path %>
-  |
-  <%= link_to 'Новая статья', new_post_path %>
+
+<!--header-->
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="<%= posts_path %>">Статьи<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Контакты</a>
+        </li>
+      </ul>
+      <%= link_to 'Новая статья', new_post_path, class: 'btn btn-primary float-right' %>
+    </div>
+  </nav>
+</div>
+<div class="container main">
   <%= yield %>
+</div>
 </body>
 </html>

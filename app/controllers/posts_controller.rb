@@ -20,7 +20,6 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, success: 'Статья успешно создана'
     else
-      flash[:danger] = 'Исправьте следующие требовнаия:'
       render :new
     end
   end

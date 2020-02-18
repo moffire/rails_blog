@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   validates :title, :summary, :body, presence: true
   has_many :taggings
   has_many :tags, through: :taggings
+  belongs_to :category
 
   def all_tags
     self.tags.map(&:name).join(', ')

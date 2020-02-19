@@ -16,7 +16,7 @@
     <% if post.category.presence %>
       <%= link_to post.category.name, post.category, class: 'badge badge-warning' %><br>
       <% if post.user %>
-        Author: <%= link_to post.user[:name], profile_path %>
+        Author: <%= link_to post.user[:name], profile_path(post.user_id) %>
       <% end %>
     <% end %>
   </section>

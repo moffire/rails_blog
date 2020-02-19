@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :taggings
   has_many :tags, through: :taggings
   belongs_to :category
+  belongs_to :user
 
   def all_tags
     self.tags.map(&:name).join(', ')

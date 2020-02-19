@@ -14,7 +14,10 @@
   <section class="footer-summary">
     <%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t), class: 'badge badge-primary' }.join(' ') %>
     <% if post.category.presence %>
-      <%= link_to post.category.name, post.category, class: 'badge badge-warning' %>
+      <%= link_to post.category.name, post.category, class: 'badge badge-warning' %><br>
+      <% if post.user %>
+        Author: <%= link_to post.user[:name], profile_path %>
+      <% end %>
     <% end %>
   </section>
 

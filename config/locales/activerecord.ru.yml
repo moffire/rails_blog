@@ -8,6 +8,7 @@ ru:
         summary: 'Краткая статья'
         body: 'Содержание'
         all_tags: 'Теги'
+        category_id: 'Категория'
     errors:
       messages:
         blank: 'не может быть пустым'

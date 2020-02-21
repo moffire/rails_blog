@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy ]
+  before_action :authenticate_user!
+  before_action :owner, only: [:edit, :destroy, :update]
 
   def index
     @posts = Post.all
@@ -16,7 +18,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.create(post_params)
     if @post.save
       redirect_to @post, success: 'Статья успешно создана'
     else
@@ -52,6 +54,11 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :summary, :body, :image, :all_tags, :category_id)
+  end
+
+  def owner
+    @post = current_user.posts.find_by(id: params[:id])
+    redirect_to posts_path, notice: 'У вас нет прав на редактирование данной статьи' if @post.nil?
   end
 
 end

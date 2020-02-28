@@ -35,8 +35,8 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :category_id %>
-    <%= f.collection_select :category_id, Category.order(:name), :id, :name, {include_blank: true}, class: 'form-control' %>
+    <%= f.label :category_id %> <%= link_to 'Добавить категорию', new_category_path %>
+    <%= f.collection_select :category_id, Category.order(:name), :id, :name, {prompt: true}, class: 'form-control' %>
   </div>
 
   <div class="form-group">

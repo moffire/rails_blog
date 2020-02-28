@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to @category, success: 'Категория успешно создана'
+      redirect_to categories_path, success: 'Категория успешно создана'
     else
       render :new
     end
@@ -37,6 +37,7 @@ class CategoriesController < ApplicationController
       render :edit
     end
   end
+
 
   private
 

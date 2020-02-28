@@ -9,6 +9,12 @@ ru:
         body: 'Содержание'
         all_tags: 'Теги'
         category_id: 'Категория'
+        category: 'Категория'
     errors:
       messages:
         blank: 'не может быть пустым'
+      models:
+        post:
+          attributes:
+            category:
+              required: 'не может быть пустым'

@@ -8,7 +8,13 @@
     <div class="col-md-7 ">
 
       <div class="panel panel-default">
-        <div class="panel-heading">  <h4 >User Profile</h4></div>
+        <div class="panel-heading">
+          <div class="panel-title pull-left"><%= @user.name %> Profile</div>
+          <% if @user == current_user %>
+            <%= link_to 'Efit Profile', edit_user_registration_path, class: 'panel-title pull-right' %>
+          <% end %>
+          <div class="clearfix"></div>
+        </div>
         <div class="panel-body">
           <div class="box box-info">
 

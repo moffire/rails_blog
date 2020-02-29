@@ -32,7 +32,11 @@
                 <!-- /input-group -->
               </div>
               <div class="col-sm-6">
-                <h4 style="color:#00b1b1;"><%= @user.name %></h4></span>
+                <% unless current_user.subscriptions.exists?(friend_id: @user) %>
+                  <h4 style="color:#00b1b1;"><%= link_to 'Подписаться', subscribe_path(@user) %></h4></span>
+                <% else%>
+                  <h4 style="color:#00b1b1;"><%= link_to 'Отписаться', unsubscribe_path(@user) %></h4></span>
+                <% end %>
               </div>
               <div class="clearfix"></div>
               <hr style="margin:5px 0 5px 0;">

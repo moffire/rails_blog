@@ -5,11 +5,6 @@ class ProfilesController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  def friends_posts
-    @posts = Post.where(user_id: current_user.subscriptions.pluck(:friend_id))
-    render 'posts/index'
-  end
-
   def selected_user_posts
     @posts = Post.where(user_id: params[:id])
     render 'posts/index'
@@ -44,6 +39,11 @@ class ProfilesController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def friends_posts
+    @posts = Post.where(user_id: current_user.subscriptions.pluck(:friend_id))
+    render 'posts/index'
   end
 
   private

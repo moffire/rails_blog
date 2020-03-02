@@ -10,6 +10,9 @@ class PostsController < ApplicationController
   def show
     if @post.nil?
       redirect_to posts_path
+    else
+      @post.views += 1
+      @post.save
     end
   end
 

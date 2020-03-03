@@ -18,7 +18,7 @@
     <% if post.category.presence %>
       <%= link_to post.category.name, post.category, class: 'badge badge-warning' %><br>
       <% if post.user %>
-        Автор: <%= link_to post.user[:name], profile_path(post.user_id) %> Просмотров: <%= post.views %>
+        Автор: <%= link_to post.user[:name], profile_path(post.user_id) %><br>Просмотров: <%= post.views %>
       <% end %>
     <% end %>
   </section>

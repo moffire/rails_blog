@@ -39,7 +39,7 @@ class CategoriesController < ApplicationController
   end
 
   def category_all_posts
-    @posts = Post.where(category_id: @category.id)
+    @posts = Post.where(category_id: @category.id).paginate(page: params[:page], per_page: 5)
     render 'posts/index'
   end
 

@@ -20,6 +20,7 @@ gem 'mini_magick'
 gem 'trix-rails', require: 'trix'
 gem 'devise'
 gem 'devise-bootstrapped'
+gem 'will_paginate', '~> 3.1.0'
 
 
 source 'https://rails-assets.org' do

@@ -1,26 +1,58 @@
-<article class="post">
-  <section class="post-head">
-    <h3><%= link_to post.title, post_path(post) %></h3>
-    <small>
-      <time><%= post.created_at.to_date.strftime("%d %B %Y") %></time>
-      <% if post.user == current_user %>
-        <%= link_to 'Изменить', edit_post_path(post) %>
-        <%= link_to 'Удалить', post_path(post), method: :delete, data: {confirm: 'Вы уверены?'} %>
-      <% end %>
-    </small>
-  </section>
-  <section class="post-summary clearfix">
-    <%= image_tag post.image.url(:thumb), class: "img-thumbnail thumb" if post.image? %>
-    <%= post.summary %>
-  </section>
-  <section class="footer-summary">
-    <%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t), class: 'badge badge-primary' }.join(' ') %>
-    <% if post.category.presence %>
-      <%= link_to post.category.name, post.category, class: 'badge badge-warning' %><br>
-      <% if post.user %>
-        Автор: <%= link_to post.user[:name], profile_path(post.user_id) %><br>Просмотров: <%= post.views %>
-      <% end %>
-    <% end %>
-  </section>
+<!--<article class="post">-->
+<!--  <section class="post-head">-->
+<!--    <h3><%#= link_to post.title, post_path(post) %></h3>-->
+<!--    <small>-->
+<!--      <time><%#= post.created_at.to_date.strftime("%d %B %Y") %></time>-->
+<%# if post.user == current_user %>
+<%#= link_to 'Изменить', edit_post_path(post) %>
+<%#= link_to 'Удалить', post_path(post), method: :delete, data: {confirm: 'Вы уверены?'} %>
+<%# end %>
+<!--    </small>-->
+<!--  </section>-->
+<!--  <section class="post-summary clearfix">-->
+<%#= image_tag post.image.url(:thumb), class: "card-img-top" if post.image? %>
+<%#= post.summary %>
+<!--  </section>-->
+<!--  <section class="footer-summary">-->
+<%#= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t), class: 'badge badge-primary' }.join(' ') %>
+<%# if post.category.presence %>
+<!--      <%#= link_to post.category.name, post.category, class: 'badge badge-warning' %><br>-->
+<%# end %>
+<!--  </section>-->
+<!--</article>-->
 
-</article>
+<div class="container">
+
+  <div class="row">
+
+    <!-- Blog Entries Column -->
+    <div class="col-md-8">
+
+      <h2 class="my-4"><%= link_to post.title, post_path(post) %></h2>
+
+      <!-- Blog Post -->
+      <div class="card mb-4">
+        <%= image_tag post.image.url(:thumb), alt: 'http://placehold.it/750x300", class: "card-img-top' if post.image? %>
+        <div class="card-body">
+          <p class="card-text"><%= post.summary %></p>
+          <a href="<%= post_path(post) %>" class="btn btn-primary">Читать далее &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+          <%= post.created_at.to_date.strftime("%d %B %Y") %>
+            Автор: <%= link_to post.user[:name], profile_path(post.user_id) %>
+          <% if post.user == current_user %>(
+            <%= link_to 'Изменить, ', edit_post_path(post), class: 'text-info' %>
+            <%= link_to 'Удалить ', post_path(post), method: :delete, data: {confirm: 'Вы уверены?'}, class: 'text-danger'  %>)
+          <% end %>
+          <br>Просмотров: <%= post.views %>
+          <% if post.category.presence %>
+            <%= link_to post.category.name, category_all_posts_path(post.category_id), class: 'badge badge-warning' %><br>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

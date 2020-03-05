@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
   <title>Blog</title>
   <%= csrf_meta_tags %>
@@ -11,44 +11,24 @@
 
 <body>
 
-<!--header-->
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="<%= root_path %>">Главная<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Подписки', profiles_friends_posts_path, class: 'nav-link' %>
-        </li>
-      </ul>
-      <% if user_signed_in? %>
-        <%= link_to 'Новая статья', new_post_path, class: 'btn btn-primary float-right mr-2' %>
-        <%= link_to 'Профиль', edit_user_registration_path, class: 'btn btn-primary float-right mr-2' %>
-        <%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'btn btn-danger float-right' %>
-      <% else %>
-        <%= link_to 'Регистрация', new_user_registration_path, class: 'btn btn-primary float-right mr-2' %>
-        <%= link_to 'Вход', new_user_session_path, class: 'btn btn-success float-right' %>
-      <% end %>
-    </div>
-  </nav>
+<!-- Navigation -->
+<%= render 'layouts/header' %>
 
 
-  <div class="container">
-    <div class="row">
-      <%= form_with url: profile_path(current_user), method: 'get', class: 'form-row' do |form| %>
-        <%= select_tag(:sort_by, options_for_select([[raw('По дате &uparrow;'), 1], [raw('По дате &downarrow;'), 2], ['По популярности', 3]]), {class: 'col-md-4 mb-3 custom-select'}) %>
-        <%= form.submit 'Применить фильтр', class: 'btn btn-success float-right' %>
-      <% end %>
-    </div>
-  </div>
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<%#= form_with url: profile_path(current_user), method: 'get', class: 'form-row' do |form| %>
+<%#= select_tag(:sort_by, options_for_select([[raw('По дате &uparrow;'), 1], [raw('По дате &downarrow;'), 2], ['По популярности', 3]]), {class: 'col-md-4 mb-3 custom-select'}) %>
+<%#= form.submit 'Применить фильтр', class: 'btn btn-success float-right' %>
+<%# end %>
+<!--    </div>-->
+<!--  </div>-->
 
 
-</div>
 <div class="container main">
   <%= render 'layouts/flashes' %>
   <%= yield %>
 </div>
+
 </body>
 </html>

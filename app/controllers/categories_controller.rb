@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy ]
+  before_action :set_category, only: [:show, :edit, :update, :destroy, :category_all_posts ]
 
   def index
     @categories = Category.all
@@ -38,6 +38,10 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def category_all_posts
+    @posts = Post.where(category_id: @category.id)
+    render 'posts/index'
+  end
 
   private
 

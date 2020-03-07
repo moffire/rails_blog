@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :get_user, only: [:show, :subscribe, :unsubscribe]
+  before_action :set_category, only: [:show, :friends_posts, :selected_user_posts]
 
   def show
     @user = User.find_by(id: params[:id])
@@ -42,7 +43,7 @@ class ProfilesController < ApplicationController
   end
 
   def friends_posts
-    @posts = Post.where(user_id: current_user.subscriptions.pluck(:friend_id))
+    @posts = Post.where(user_id: current_user.subscriptions.pluck(:friend_id)).paginate(page: params[:page], per_page: 5)
     render 'posts/index'
   end
 
@@ -51,4 +52,9 @@ class ProfilesController < ApplicationController
     @user = User.find_by(id: params[:id])
     redirect_to root_path if @user.nil?
   end
+
+  def set_category
+    @categories = Category.all
+  end
+
 end

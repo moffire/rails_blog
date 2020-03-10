@@ -1,73 +1,93 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-7 ">
+    <div class="row">
+        <div class="col-md-12">
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-title pull-left"><%= @user.name %> Profile</div>
-          <% if @user == current_user %>
-            <%= link_to 'Efit Profile', edit_user_registration_path, class: 'panel-title pull-right' %>
-          <% end %>
-          <div class="clearfix"></div>
-        </div>
-        <div class="panel-body">
-          <div class="box box-info">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <% if @user == current_user %>
+                        <%= link_to 'Efit Profile', edit_user_registration_path, class: 'panel-title pull-right' %>
+                    <% end %>
+                    <div class="clearfix"></div>
+                    <div class="panel-body">
+                        <div class="box box-info">
 
-            <div class="box-body">
-              <div class="col-sm-6">
-                <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                            <div class="box-body">
+                                <div class="col-sm-2 m-3">
+                                    <div align="left">
+                                        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
 
-                  <input id="profile-image-upload" class="hidden" type="file">
-                  <div style="color:#999;" >click here to change profile image</div>
-                  <!--Upload Image Js And Css-->
+                                        <input id="profile-image-upload" class="hidden" type="file">
+                                        <% unless current_user.subscriptions.exists?(friend_id: @user) %>
+                                            <h6 style="color:#00b1b1;"><%= link_to 'Подписаться', subscribe_path(@user) %></h6></span>
+                                        <% else %>
+                                            <h6 style="color:#00b1b1;"><%= link_to 'Отписаться', unsubscribe_path(@user) %></h6></span>
+                                        <% end %>
+                                    </div>
+                                    <br>
+                                    <!-- /input-group -->
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr style="margin:5px 0 5px 0;">
+
+
+                                <div class="col-sm-5 col-xs-6 tital ">Имя пользователя:</div>
+                                <div class="col-sm-7 col-xs-6 "><%= @user.name %></div>
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+
+                                <div class="col-sm-5 col-xs-6 tital ">Дата регистрации:</div>
+                                <div class="col-sm-7"><%= @user.created_at.to_date %></div>
+
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+
+                                <div class="col-sm-5 col-xs-6 tital ">Количество постов:</div>
+                                <div class="col-sm-7"><%= link_to @user.posts.count, selected_user_posts_path %></div>
+
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+
+                                <div class="col-sm-5 col-xs-6 tital ">Связанные статьи:</div>
+                                <table class="table table-sm col-sm-12">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Тема</th>
+                                        <th scope="col">Содержание</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <% @user.posts.each_with_index do |post, index| %>
+                                        <tr>
+                                            <th scope="row"><%= index + 1 %></th>
+                                            <td><%= link_to post.title, post_path(post) %></td>
+                                            <td><%= post.summary %></td>
+                                        </tr>
+                                    <% end %>
+                                    </tbody>
+                                </table>
+
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                    </div>
                 </div>
-
-                <br>
-
-                <!-- /input-group -->
-              </div>
-              <div class="col-sm-6">
-                <% unless current_user.subscriptions.exists?(friend_id: @user) %>
-                  <h4 style="color:#00b1b1;"><%= link_to 'Подписаться', subscribe_path(@user) %></h4></span>
-                <% else%>
-                  <h4 style="color:#00b1b1;"><%= link_to 'Отписаться', unsubscribe_path(@user) %></h4></span>
-                <% end %>
-              </div>
-              <div class="clearfix"></div>
-              <hr style="margin:5px 0 5px 0;">
-
-
-              <div class="col-sm-5 col-xs-6 tital " >Имя пользователя: </div><div class="col-sm-7 col-xs-6 "><%= @user.name %></div>
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-
-              <div class="col-sm-5 col-xs-6 tital " >Дата регистрации: </div><div class="col-sm-7"><%= @user.created_at.to_date %></div>
-
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-
-              <div class="col-sm-5 col-xs-6 tital " >Количество постов: </div><div class="col-sm-7"><%= link_to @user.posts.count, selected_user_posts_path %></div>
-
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-              <!-- /.box-body -->
             </div>
-            <!-- /.box -->
-          </div>
+            <script>
+                $(function () {
+                    $('#profile-image1').on('click', function () {
+                        $('#profile-image-upload').click();
+                    });
+                });
+            </script>
         </div>
-      </div>
     </div>
-    <script>
-        $(function() {
-            $('#profile-image1').on('click', function() {
-                $('#profile-image-upload').click();
-            });
-        });
-    </script>
-  </div>
 </div>

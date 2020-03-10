@@ -1,6 +1,28 @@
 <div class="card my-4">
-    <h5 class="card-header">Фильтры</h5>
+    <h5 class="card-header">Сортировать</h5>
     <div class="card-body">
-        Сделать тут чекбоксы
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <%= select_tag(:sort_order, options_for_select([[raw('По дате &uarr;'), 'ascending'],
+                                                                        [raw('По дате &darr;'), 'descending'],
+                                                                        [raw('По просмотрам &uarr;'), 'views_ascending'],
+                                                                        [raw('По просмотрам &darr;'), 'views_descending']]), include_blank: true, class: 'form-control') %>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <%= submit_tag 'Применить', class: 'btn btn-primary' %>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
     </div>
 </div>
+
+

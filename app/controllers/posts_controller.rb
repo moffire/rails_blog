@@ -10,6 +10,21 @@ class PostsController < ApplicationController
     else
       @posts = Post.all.paginate(page: params[:page], per_page: 5)
     end
+
+    if params[:sort_order].present?
+      case params[:sort_order]
+      when 'ascending'
+        @posts = Post.all.order(created_at: :asc).paginate(page: params[:page], per_page: 5)
+      when 'descending'
+        @posts = Post.all.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+      when 'views_ascending'
+        @posts = Post.all.order(views: :asc).paginate(page: params[:page], per_page: 5)
+      when 'views_descending'
+        @posts = Post.all.order(views: :desc).paginate(page: params[:page], per_page: 5)
+      else
+        @posts = Post.all
+      end
+    end
   end
 
   def show

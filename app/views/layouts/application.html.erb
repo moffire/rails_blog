@@ -14,17 +14,6 @@
 <!-- Navigation -->
 <%= render 'layouts/header' %>
 
-
-<!--  <div class="container">-->
-<!--    <div class="row">-->
-<%#= form_with url: profile_path(current_user), method: 'get', class: 'form-row' do |form| %>
-<%#= select_tag(:sort_by, options_for_select([[raw('По дате &uparrow;'), 1], [raw('По дате &downarrow;'), 2], ['По популярности', 3]]), {class: 'col-md-4 mb-3 custom-select'}) %>
-<%#= form.submit 'Применить фильтр', class: 'btn btn-success float-right' %>
-<%# end %>
-<!--    </div>-->
-<!--  </div>-->
-
-
 <div class="container main">
   <%= render 'layouts/flashes' %>
   <%= yield %>
